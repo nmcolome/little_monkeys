@@ -35,5 +35,8 @@ class Numbers
     }
   end
 
+  def builder(number)
+    
+  end
 end
 

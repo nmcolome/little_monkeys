@@ -36,7 +36,17 @@ class Numbers
   end
 
   def builder(number)
-    
+    string_num = number.to_s
+    if string_num.length == 1
+      names[number]
+    elsif string_num.length == 2 && string_num[0] == "1" || string_num[1] == "0"
+      names[number]
+    elsif string_num.length == 2
+      temporary = [string_num.split(""), ["0", ""]].transpose
+      tens = temporary[0].join.to_i
+      unit = temporary[1].join.to_i
+      names[tens] + "-" + names[unit]
+    end
   end
 end
 

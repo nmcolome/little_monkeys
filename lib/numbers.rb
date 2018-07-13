@@ -1,7 +1,9 @@
+require 'pry'
 class Numbers
 
   def names
     {
+      0 => "",
       1 => "one",
       2 => "two",
       3 => "three",
@@ -28,25 +30,39 @@ class Numbers
       60 => "sixty",
       70 => "seventy",
       80 => "eighty",
-      90 => "ninety",
-      100 => "hundred",
-      1000 => "thousand",
-      1000000 => "million"
+      90 => "ninety"
     }
   end
 
   def builder(number)
-    string_num = number.to_s
-    if string_num.length == 1
-      names[number]
-    elsif string_num.length == 2 && string_num[0] == "1" || string_num[1] == "0"
-      names[number]
-    elsif string_num.length == 2
-      temporary = [string_num.split(""), ["0", ""]].transpose
-      tens = temporary[0].join.to_i
-      unit = temporary[1].join.to_i
-      names[tens] + "-" + names[unit]
+    num_s = number.to_s
+    size = num_s.length
+
+    if size == 1
+      units(number)
+    elsif size == 2 && (num_s[0] == "1" || num_s[1] == "0")
+      units(number)
+    elsif size == 2
+      tens(num_s[0]) + " " + units(num_s[1].to_i)
+    elsif size == 3
+      ( hundreds(num_s[0].to_i) + " " + builder(num_s[1..2].to_i) ).strip
+      #iterate the tens
     end
+  end
+
+  def units(number)
+    names[number]
+  end
+
+  def tens(number)
+    names[(number+"0").to_i]
+  end
+
+  def hundreds(number)
+    units(number) + " hundred"
   end
 end
 
+num = Numbers.new
+
+# p num.builder(500)

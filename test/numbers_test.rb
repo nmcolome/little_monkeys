@@ -44,4 +44,11 @@ class NumbersTest < Minitest::Test
     assert_equal "seven hundred forty nine million one hundred fifty two thousand seven hundred twenty one", @numbers.scale(749152721)
   end
 
+  def test_it_builds_names_for_billions
+    assert_equal "three billion", @numbers.scale(3000000000)
+    assert_equal "twelve billion", @numbers.scale(12000000000)
+    assert_equal "one hundred eleven billion", @numbers.scale(111000000000)
+    assert_equal "seven hundred forty nine billion one hundred fifty two million seven hundred twenty one thousand", @numbers.scale(749152721000)
+  end
+
 end

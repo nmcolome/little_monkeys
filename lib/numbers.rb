@@ -34,6 +34,42 @@ class Numbers
     }
   end
 
+  def size_to_scale
+    {
+      3 => 100,
+      4 => 1000,
+      5 => 1000,
+      6 => 1000,
+      7 => 1000000,
+      8 => 1000000,
+      9 => 1000000,
+      10 => 1000000000,
+      11 => 1000000000,
+      12 => 1000000000,
+      13 => 1000000000000,
+      14 => 1000000000000,
+      15 => 1000000000000
+    }
+  end
+
+  def size_to_scale_name
+    {
+      3 => " hundred ",
+      4 => " thousand ",
+      5 => " thousand ",
+      6 => " thousand ",
+      7 => " million ",
+      8 => " million ",
+      9 => " million ",
+      10 => " billion ",
+      11 => " billion ",
+      12 => " billion ",
+      13 => " trillion ",
+      14 => " trillion ",
+      15 => " trillion "
+    }
+  end
+
   def builder(number)
     size = number.to_s.length
 
@@ -60,19 +96,14 @@ class Numbers
     units(number) + " hundred"
   end
 
-  #similar to fizzbuzz million+thousand+hundreds
   def scale(number)
     size = number.to_s.length
     if size <= 3
       builder(number)
-    elsif size <= 6
-      thousands = number / 1000
-      remainder = number % 1000
-      ( builder(thousands) + " thousand " + scale(remainder) ).strip
-    elsif size <= 9
-      millions = number / 1000000
-      remainder = number % 1000000
-      (  builder(millions) + " million " + scale(remainder) ).strip
+    else
+      first_part = number / size_to_scale[size]
+      remainder = number % size_to_scale[size]
+      ( builder(first_part) + size_to_scale_name[size] + scale(remainder) ).strip
     end
   end
 end

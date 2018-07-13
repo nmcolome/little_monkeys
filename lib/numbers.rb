@@ -35,17 +35,16 @@ class Numbers
   end
 
   def builder(number)
-    num_s = number.to_s
-    size = num_s.length
+    size = number.to_s.length
 
     if size == 1
       units(number)
-    elsif size == 2 && (num_s[0] == "1" || num_s[1] == "0")
+    elsif size == 2 && (number / 10 == 1 || number % 10 == 0)
       units(number)
     elsif size == 2
-      tens(num_s[0]) + " " + units(num_s[1].to_i)
+      tens(number / 10) + " " + units(number % 10)
     elsif size == 3
-      ( hundreds(num_s[0].to_i) + " " + builder(num_s[1..2].to_i) ).strip
+      ( hundreds(number / 100) + " " + builder(number % 100) ).strip
     end
   end
 
@@ -54,7 +53,7 @@ class Numbers
   end
 
   def tens(number)
-    names[(number+"0").to_i]
+    names[(number*10)]
   end
 
   def hundreds(number)

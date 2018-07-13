@@ -1,4 +1,3 @@
-require 'pry'
 class Numbers
 
   def names

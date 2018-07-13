@@ -23,11 +23,12 @@ class NumbersTest < Minitest::Test
     assert_equal "one hundred", numbers.scale(100)
     assert_equal "three hundred fifty", numbers.scale(350)
     assert_equal "four hundred eleven", numbers.scale(411)
-    # assert_equal "six thousand", numbers.builder(6000)
-    # assert_equal "six thousand one hundred eleven", numbers.builder(6111)
-    # assert_equal "one thousand eight hundred forty two", numbers.builder(1842)
-    # assert_equal "twelve thousand", numbers.builder(12000)
-    # assert_equal "one hundred twenty five thousand", numbers.builder(125000)
+    assert_equal "six thousand", numbers.scale(6000)
+    assert_equal "six thousand one hundred eleven", numbers.scale(6111)
+    assert_equal "one thousand eight hundred forty two", numbers.scale(1842)
+    assert_equal "twelve thousand", numbers.scale(12000)
+    assert_equal "one hundred twenty five thousand", numbers.scale(125000)
+    assert_equal "one hundred twenty five thousand seven hundred twenty one", numbers.scale(125721)
   end
 
 end

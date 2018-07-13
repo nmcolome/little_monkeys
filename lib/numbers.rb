@@ -67,8 +67,12 @@ class Numbers
       builder(number)
     elsif size <= 6
       thousands = number / 1000
-      hundreds = number % 1000
-      (builder(thousands) + " thousand " + builder(hundreds)).strip
+      remainder = number % 1000
+      ( builder(thousands) + " thousand " + scale(remainder) ).strip
+    elsif size <= 9
+      millions = number / 1000000
+      remainder = number % 1000000
+      (  builder(millions) + " million " + scale(remainder) ).strip
     end
   end
 end

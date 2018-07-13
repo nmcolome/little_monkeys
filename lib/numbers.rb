@@ -46,7 +46,8 @@ class Numbers
       tens(num_s[0]) + " " + units(num_s[1].to_i)
     elsif size == 3
       ( hundreds(num_s[0].to_i) + " " + builder(num_s[1..2].to_i) ).strip
-      #iterate the tens
+    elsif size == 4
+      ( thousand(num_s[0].to_i) + " " + builder(num_s[1..3].to_i) ).strip
     end
   end
 
@@ -61,8 +62,17 @@ class Numbers
   def hundreds(number)
     units(number) + " hundred"
   end
+
+  def thousand(number)
+    units(number) + " thousand"
+  end
+
+  def scale(number)
+    size = number.to_s.length
+    if size <= 3
+      builder(number)
+    elsif size <= 6
+      #are thousands
+    end
+  end
 end
-
-num = Numbers.new
-
-# p num.builder(500)

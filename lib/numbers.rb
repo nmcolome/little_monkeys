@@ -1,4 +1,4 @@
-class Numbers
+class NumbersToWords
 
   def names
     {
@@ -90,14 +90,14 @@ class Numbers
     units(number) + " hundred "
   end
 
-  def scale(number)
+  def run(number)
     size = number.to_s.length
     if size <= 3
       builder(number)
     else
       first_part = number / size_to_scale[size]
       remainder = number % size_to_scale[size]
-      ( builder(first_part) + size_to_scale_name[size] + scale(remainder) ).strip
+      ( builder(first_part) + size_to_scale_name[size] + run(remainder) ).strip
     end
   end
 end

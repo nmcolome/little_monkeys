@@ -54,7 +54,6 @@ class Numbers
 
   def size_to_scale_name
     {
-      3 => " hundred ",
       4 => " thousand ",
       5 => " thousand ",
       6 => " thousand ",
@@ -71,16 +70,12 @@ class Numbers
   end
 
   def builder(number)
-    size = number.to_s.length
-
-    if size == 1
+    if number / 20 == 0
       units(number)
-    elsif size == 2 && (number / 10 == 1 || number % 10 == 0)
-      units(number)
-    elsif size == 2
-      tens(number / 10) + " " + units(number % 10)
-    elsif size == 3
-      ( hundreds(number / 100) + " " + builder(number % 100) ).strip
+    elsif number / 100 == 0
+      (tens(number / 10) + units(number % 10)).strip
+    else
+      ( hundreds(number / 100) + builder(number % 100) ).strip
     end
   end
 
@@ -89,11 +84,11 @@ class Numbers
   end
 
   def tens(number)
-    names[(number*10)]
+    names[(number*10)] + " "
   end
 
   def hundreds(number)
-    units(number) + " hundred"
+    units(number) + " hundred "
   end
 
   def scale(number)

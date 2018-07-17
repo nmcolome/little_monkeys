@@ -28,3 +28,7 @@ class LittleMonkeys
   end
 
 end
+
+print "Enter the number of monkeys (must be >0): > "
+monkeys = gets.chomp.to_i
+print LittleMonkeys.new.run(monkeys)
